@@ -10,6 +10,7 @@ tags:
 title: eXist-db 4.11.1
 updated: '2023-01-13T04:45:25.726000+01:00'
 wiki_id: eXistdb4111
+lead: "Critical fixes for defects found in version 4.10.0"
 ---
 
 # eXist-db 4.11.1 Release Notes

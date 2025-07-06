@@ -10,6 +10,7 @@ tags:
 title: eXist-db 6.1.0
 updated: '2023-01-15T15:35:00.202000+01:00'
 wiki_id: eXistdb610
+lead: Supports all XQuery 3.1 functions. Includes numerous new features and critical fixes for defects found in version 6.0.1.
 ---
 
 # eXist-db 6.1.0 Release Notes

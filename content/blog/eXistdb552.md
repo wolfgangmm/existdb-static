@@ -9,6 +9,7 @@ tags:
 - article
 title: eXist-db 5.5.2
 updated: '2024-10-19T20:53:04.627000+02:00'
+lead: "Version 5.5.2 includes critical fixes for defects found in version 5.5.1"
 ---
 
 # eXist-db 5.5.2 Release Notes

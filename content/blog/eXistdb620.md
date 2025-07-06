@@ -10,6 +10,7 @@ tags:
 title: eXist-db 6.2.0
 updated: '2023-02-05T17:09:03.676000+01:00'
 wiki_id: eXistdb620
+lead: "Incremental improvement over 6.1.0 that addresses three late breaking bugs/regressions"
 ---
 
 # eXist-db 6.2.0 Release Notes
