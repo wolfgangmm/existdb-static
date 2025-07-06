@@ -47,7 +47,6 @@ The site will be available at `http://localhost:8080`
 static-website/
 ├── content/                 # Content files (Markdown, Nunjucks)
 │   ├── blog/               # Blog posts
-│   ├── about.md            # About page
 │   └── index.njk           # Home page
 ├── _includes/              # Template includes
 │   ├── layouts/            # Page layouts
@@ -55,6 +54,9 @@ static-website/
 │   │   ├── home.njk        # Home page layout
 │   │   └── post.njk        # Blog post layout
 │   └── partials/           # Reusable components
+│       ├── menubar.njk     # Navigation menu component
+│       ├── footer.njk      # Footer component
+│       └── tagcloud.njk    # Tag cloud component
 ├── _data/                  # Global data files
 ├── public/                 # Static assets
 │   ├── css/               # Compiled CSS
