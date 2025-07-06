@@ -81,20 +81,24 @@ static-website/
 #### Blog Posts
 
 1. Create a new Markdown file in `content/blog/`
-2. Use the following front matter structure:
+2. Use the following template for the front matter structure:
 ```yaml
 ---
 title: "Your Post Title"
 date: 2024-01-01
-tags: ["posts"]
+tags: ["posts", "release", "article"]
+author: "nickname"
 author_display: "Author Name"
+lead: "A short abstract summarizing the post in one sentence"
+coverImage: "Name of a cover image, path relative to public/img"
+coverImageCredits: "Credits to be shown for the cover image"
 ---
 ```
 
 3. Write your content in Markdown
 4. The post will automatically appear in the blog listing and RSS feed
 
-#### Pages
+#### Other Pages
 
 1. Create a new Markdown or Nunjucks file in `content/`
 2. Add navigation metadata if needed:
@@ -116,11 +120,7 @@ The site uses:
 
 ### Image Handling
 
-Images are automatically optimized using Eleventy's image plugin:
-- Supports multiple formats (AVIF, WebP, JPEG)
-- Automatic lazy loading
-- Responsive sizing
-- Place images in `public/img/` and reference them in your content
+Place images in `public/img/` and reference them in your content using `/img/` as prefix.
 
 ## Deployment
 
