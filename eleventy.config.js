@@ -21,13 +21,16 @@ export default async function(eleventyConfig) {
 		.addPassthroughCopy({
 			"./public/": "/"
 		})
-		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl");
+		.addPassthroughCopy("./content/feed/pretty-atom-feed.xsl")
+		.addPassthroughCopy({ "public/css": "css" });
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Watch CSS files
 	eleventyConfig.addWatchTarget("css/**/*.css");
+	// Watch SCSS files
+	eleventyConfig.addWatchTarget("sass/**/*.scss");
 	// Watch images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpg,jpeg,gif}");
 
@@ -72,11 +75,11 @@ export default async function(eleventyConfig) {
 		},
 		metadata: {
 			language: "en",
-			title: "Blog Title",
-			subtitle: "This is a longer description about your blog.",
-			base: "https://example.com/",
+			title: "eXist-db News",
+			subtitle: "News, articles and announcements from the eXist-db project.",
+			base: "https://exist-db.org/",
 			author: {
-				name: "Your Name"
+				name: "eXist-db Project"
 			}
 		}
 	});
@@ -106,7 +109,7 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addPlugin(pluginFilters);
 
 	eleventyConfig.addPlugin(IdAttributePlugin, {
-		// by default we use Eleventy’s built-in `slugify` filter:
+		// by default we use Eleventy's built-in `slugify` filter:
 		// slugify: eleventyConfig.getFilter("slugify"),
 		// selector: "h1,h2,h3,h4,h5,h6", // default
 	});

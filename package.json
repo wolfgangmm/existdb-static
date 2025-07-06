@@ -1,16 +1,17 @@
 {
-	"name": "eleventy-base-blog",
-	"version": "9.0.0",
-	"description": "A starter repository for a blog web site using the Eleventy site generator.",
+	"name": "eXistdb-static",
+	"version": "1.0.0",
+	"description": "Static site for eXistdb",
 	"type": "module",
 	"scripts": {
-		"build": "npx @11ty/eleventy",
-		"build-nocolor": "cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
-		"build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
-		"start": "npx @11ty/eleventy --serve --quiet",
-		"start-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
-		"debug": "cross-env DEBUG=Eleventy* npx @11ty/eleventy",
-		"debugstart": "cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+		"build": "npm run build:css && npx @11ty/eleventy",
+		"build:css": "sass sass/main.scss:public/css/main.css --style=compressed",
+		"build-nocolor": "npm run build:css && cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
+		"build-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+		"start": "npm run build:css && npx @11ty/eleventy --serve --quiet",
+		"start-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
+		"debug": "npm run build:css && cross-env DEBUG=Eleventy* npx @11ty/eleventy",
+		"debugstart": "npm run build:css && cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
 		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
 	},
 	"repository": {
@@ -18,22 +19,14 @@
 		"url": "git://github.com/11ty/eleventy-base-blog.git"
 	},
 	"author": {
-		"name": "Zach Leatherman",
-		"email": "zachleatherman@gmail.com",
-		"url": "https://zachleat.com/"
+		"name": "eXistdb",
+		"email": "info@exist-db.org",
+		"url": "https://exist-db.org/"
 	},
 	"license": "MIT",
 	"engines": {
 		"node": ">=18"
 	},
-	"funding": {
-		"type": "opencollective",
-		"url": "https://opencollective.com/11ty"
-	},
-	"bugs": {
-		"url": "https://github.com/11ty/eleventy-base-blog/issues"
-	},
-	"homepage": "https://github.com/11ty/eleventy-base-blog#readme",
 	"devDependencies": {
 		"@11ty/eleventy": "^3.1.2",
 		"@11ty/eleventy-img": "^6.0.4",
@@ -43,6 +36,7 @@
 		"cross-env": "^7.0.3",
 		"luxon": "^3.6.1",
 		"prismjs": "^1.30.0",
+		"sass": "^1.89.2",
 		"zod": "^3.25.67",
 		"zod-validation-error": "^3.5.2"
 	},
