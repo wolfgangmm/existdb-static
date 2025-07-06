@@ -32,13 +32,13 @@ layout: layouts/base.njk
 
     <div class="btn-group w-100 mb-3">
         {%- if nextPost %}
-        <a class="btn btn-light" href="{{ nextPost.url | url }}" data-bs-toggle="tooltip"
+        <a class="btn btn-light" href="{{ nextPost.url }}" data-bs-toggle="tooltip"
             data-bs-title="{{ nextPost.data.title }}" data-bs-placement="bottom">
             <i class="bi bi-arrow-left"></i>
         </a>
         {% endif %}
         {%- if previousPost %}
-        <a class="btn btn-light" href="{{ previousPost.url | url }}" data-bs-toggle="tooltip"
+        <a class="btn btn-light" href="{{ previousPost.url }}" data-bs-toggle="tooltip"
             data-bs-title="{{ previousPost.data.title }}" data-bs-placement="bottom">
             <i class="bi bi-arrow-right"></i>
         </a>

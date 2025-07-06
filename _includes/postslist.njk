@@ -11,13 +11,13 @@
                 <div class="tagline">
                     {% for tag in post.data.tags | filterTagList %}
                     {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-                    <a href="{{ tagUrl | url }}" class="badge text-bg-light">{{ tag }}</a>
+                    <a href="{{ tagUrl }}" class="badge text-bg-light">{{ tag }}</a>
                     {% endfor %}
                 </div>
             </div>
             <div class="card-body">
                 <h3 class="card-title">
-                    <a href="{{ post.url | url }}" class="text-muted">{% if post.data.short %}{{ post.data.short }}{%
+                    <a href="{{ post.url }}" class="text-muted">{% if post.data.short %}{{ post.data.short }}{%
                         elif post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
                 </h3>
                 {% if post.data.lead %}

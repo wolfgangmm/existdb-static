@@ -4,7 +4,7 @@
     {% set weight = count // 4 %}
     {% set fontSize %}calc({{weight}} * 0.1rem + var(--font-size-smallest)){% endset %}
     <li>
-      <a href="{{ tagUrl | url }}" data-count="{{count}}" 
+      <a href="{{ tagUrl }}" data-count="{{count}}" 
         style="font-size: {{fontSize}};" class="post-tag">{{ tag }}</a>
     </li>
   {% endfor %}
