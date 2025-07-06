@@ -1,4 +1,4 @@
-import { IdAttributePlugin, InputPathToUrlTransformPlugin, HtmlBasePlugin } from "@11ty/eleventy";
+import { IdAttributePlugin, InputPathToUrlTransformPlugin } from "@11ty/eleventy";
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
@@ -81,7 +81,6 @@ export default async function(eleventyConfig) {
 		preAttributes: { tabindex: 0 }
 	});
 	eleventyConfig.addPlugin(pluginNavigation);
-	eleventyConfig.addPlugin(HtmlBasePlugin);
 	eleventyConfig.addPlugin(InputPathToUrlTransformPlugin);
     eleventyConfig.addPlugin(pluginToc, { 
         ul: true,
