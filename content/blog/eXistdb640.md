@@ -10,6 +10,7 @@ tags:
 title: eXist-db 6.4.0
 updated: '2025-05-06T21:32:17.641000+02:00'
 wiki_id: eXistdb640
+lead: "Small feature release addressing three breaking regressions discovered in 6.3.0"
 ---
 
 # Release Notes

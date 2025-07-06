@@ -7,5 +7,7 @@ export default {
 		name: "eXist-db",
 		email: "info@exist-db.org",
 		url: "https://exist-db.org/"
-	}
+	},
+    "defaultCover": "placeholder.png",
+    "defaultCoverCredit": ""
 }

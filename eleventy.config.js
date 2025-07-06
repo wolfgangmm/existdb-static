@@ -3,11 +3,26 @@ import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginNavigation from "@11ty/eleventy-navigation";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
-
+import Image from "@11ty/eleventy-img";
 import pluginFilters from "./_config/filters.js";
+import path from "path";
+
+async function imageShortcode(src, alt) {
+    const imageName = path.basename(src);
+    const metadata = await Image(`public/img/${imageName}`, {
+        widths: [300],
+        formats: ["jpeg"],
+        outputDir: "./_site/img/",
+        urlPath: "/img/"
+    });
+    const data = metadata.jpeg[metadata.jpeg.length - 1];
+    return `<img src="${data.url}" alt="${alt || ''}" title="${alt}" data-bs-toggle="tooltip" loading="lazy" decoding="async">`;
+}
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default async function(eleventyConfig) {
+    eleventyConfig.addNunjucksAsyncShortcode("thumb", imageShortcode);
+
 	// Drafts, see also _data/eleventyDataSchema.js
 	eleventyConfig.addPreprocessor("drafts", "*", (data, content) => {
 		if(data.draft && process.env.ELEVENTY_RUN_MODE === "build") {
@@ -85,25 +100,25 @@ export default async function(eleventyConfig) {
 	});
 
 	// Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-		// Output formats for each image.
-		formats: ["avif", "webp", "auto"],
+	// eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+	// 	// Output formats for each image.
+	// 	formats: ["avif", "webp", "auto"],
 
-		// widths: ["auto"],
+	// 	// widths: ["auto"],
 
-		failOnError: false,
-		htmlOptions: {
-			imgAttributes: {
-				// e.g. <img loading decoding> assigned on the HTML tag will override these values.
-				loading: "lazy",
-				decoding: "async",
-			}
-		},
+	// 	failOnError: false,
+	// 	htmlOptions: {
+	// 		imgAttributes: {
+	// 			// e.g. <img loading decoding> assigned on the HTML tag will override these values.
+	// 			loading: "lazy",
+	// 			decoding: "async",
+	// 		}
+	// 	},
 
-		sharpOptions: {
-			animated: true,
-		},
-	});
+	// 	sharpOptions: {
+	// 		animated: true,
+	// 	},
+	// });
 
 	// Filters
 	eleventyConfig.addPlugin(pluginFilters);
@@ -125,6 +140,28 @@ export default async function(eleventyConfig) {
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
 	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+
+    function filterTagList(tags) {
+        return (tags || []).filter(tag => ["all", "nav", "static", "posts"].indexOf(tag) === -1);
+    }
+
+    eleventyConfig.addFilter("filterTagList", filterTagList)
+
+    // Create an array of all tags
+    eleventyConfig.addCollection("tagList", function (collection) {
+        let tagSet = new Set();
+        collection.getAll().forEach(item => {
+            (item.data.tags || []).forEach(tag => tagSet.add(tag));
+        });
+
+        const tags = filterTagList([...tagSet]);
+        const tagMap = new Map();
+        tags.forEach(tag => {
+            const items = collection.getFilteredByTag(tag);
+            tagMap.set(tag, items.length);
+        });
+        return tagMap;
+    });
 };
 
 export const config = {
