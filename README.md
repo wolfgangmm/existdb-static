@@ -1,117 +1,182 @@
-# eleventy-base-blog v9
+# eXist-db Static Website
 
-A starter repository showing how to build a blog with the [Eleventy](https://www.11ty.dev/) site generator (using the [v3.0 release](https://github.com/11ty/eleventy/releases/tag/v3.0.0)).
+A static website for the eXist-db project, built with [Eleventy](https://www.11ty.dev/) (v3.0). This site serves as the news and announcements platform for the eXist-db XML database project.
+
+## About eXist-db
+
+[eXist-db](https://exist-db.org/) is an open-source NoSQL database built entirely with XML technology. It provides XQuery, XSLT, XPath, and other XML standards for querying and transforming data.
+
+## Project Overview
+
+This static website provides:
+- **News and Announcements**: Latest updates about eXist-db releases and development
+- **Blog Posts**: Technical articles, tutorials, and community updates
+- **Documentation Links**: Direct access to eXist-db documentation
+- **RSS Feed**: Atom feed for staying updated with the latest news
 
 ## Getting Started
 
-* [Want a more generic/detailed getting started guide?](https://www.11ty.dev/docs/getting-started/)
+### Prerequisites
 
-1. Make a directory and navigate to it:
+- Node.js 18 or higher
+- npm
 
-```
-mkdir my-blog-name
-cd my-blog-name
-```
+### Installation
 
-2. Clone this Repository
-
-```
-git clone https://github.com/11ty/eleventy-base-blog.git .
+1. Clone the repository:
+```bash
+git clone https://github.com/exist-db/static-website.git
+cd static-website
 ```
 
-_Optional:_ Review `eleventy.config.js` and `_data/metadata.js` to configure the site’s options and data.
-
-3. Install dependencies
-
-```
+2. Install dependencies:
+```bash
 npm install
 ```
 
-4. Run Eleventy
-
-Generate a production-ready build to the `_site` folder:
-
-```
-npx @11ty/eleventy
+3. Start the development server:
+```bash
+npm start
 ```
 
-Or build and host on a local development server:
+The site will be available at `http://localhost:8080`
+
+## Project Structure
 
 ```
-npx @11ty/eleventy --serve
+static-website/
+├── content/                 # Content files (Markdown, Nunjucks)
+│   ├── blog/               # Blog posts
+│   ├── about.md            # About page
+│   └── index.njk           # Home page
+├── _includes/              # Template includes
+│   ├── layouts/            # Page layouts
+│   │   ├── base.njk        # Base HTML template
+│   │   ├── home.njk        # Home page layout
+│   │   └── post.njk        # Blog post layout
+│   └── partials/           # Reusable components
+├── _data/                  # Global data files
+├── public/                 # Static assets
+│   ├── css/               # Compiled CSS
+│   ├── img/               # Images
+│   └── js/                # JavaScript files
+├── sass/                  # SCSS source files
+└── eleventy.config.js     # Eleventy configuration
 ```
 
-Or you can run [debug mode](https://www.11ty.dev/docs/debugging/) to see all the internals.
+## Development
+
+### Available Scripts
+
+- `npm start` - Start development server with live reload
+- `npm run build` - Build for production
+- `npm run build:css` - Compile SCSS to CSS only
+- `npm run start-ghpages` - Start server with GitHub Pages path prefix
+- `npm run debug` - Run with debug logging
+
+### Adding Content
+
+#### Blog Posts
+
+1. Create a new Markdown file in `content/blog/`
+2. Use the following front matter structure:
+```yaml
+---
+title: "Your Post Title"
+date: 2024-01-01
+tags: ["posts"]
+author_display: "Author Name"
+---
+```
+
+3. Write your content in Markdown
+4. The post will automatically appear in the blog listing and RSS feed
+
+#### Pages
+
+1. Create a new Markdown or Nunjucks file in `content/`
+2. Add navigation metadata if needed:
+```yaml
+---
+eleventyNavigation:
+  key: "Page Name"
+  order: 1
+---
+```
+
+### Styling
+
+The site uses:
+- **Bootstrap 5.3.7** for responsive layout and components
+- **Bootstrap Icons** for icons
+- **Custom SCSS** in `sass/main.scss` for project-specific styles
+- **Sass** compilation for CSS preprocessing
+
+### Image Handling
+
+Images are automatically optimized using Eleventy's image plugin:
+- Supports multiple formats (AVIF, WebP, JPEG)
+- Automatic lazy loading
+- Responsive sizing
+- Place images in `public/img/` and reference them in your content
+
+## Deployment
+
+This site is automatically deployed to GitHub Pages using GitHub Actions. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed setup instructions.
+
+### Manual Deployment
+
+1. Build the site:
+```bash
+npm run build
+```
+
+2. The built site will be in the `_site/` directory
 
 ## Features
 
-- Using [Eleventy v3](https://github.com/11ty/eleventy/releases/tag/v3.0.0) with zero-JavaScript output.
-	- Content is exclusively pre-rendered (this is a static site).
-	- Can easily [deploy to a subfolder without changing any content](https://www.11ty.dev/docs/plugins/html-base/)
-	- All URLs are decoupled from the content’s location on the file system.
-	- Configure templates via the [Eleventy Data Cascade](https://www.11ty.dev/docs/data-cascade/)
-- **Performance focused**: four-hundos Lighthouse score out of the box!
-	- _0 Cumulative Layout Shift_
-	- _0ms Total Blocking Time_
-- Local development live reload provided by [Eleventy Dev Server](https://www.11ty.dev/docs/dev-server/).
-- Content-driven [navigation menu](https://www.11ty.dev/docs/plugins/navigation/)
-- Fully automated [Image optimization](https://www.11ty.dev/docs/plugins/image/)
-	- Zero-JavaScript output.
-	- Support for modern image formats automatically (e.g. AVIF and WebP)
-	- Processes images on-request during `--serve` for speedy local builds.
-	- Prefers `<img>` markup if possible (single image format) but switches automatically to `<picture>` for multiple image formats.
-	- Automated `<picture>` syntax markup with `srcset` and optional `sizes`
-	- Includes `width`/`height` attributes to avoid [content layout shift](https://web.dev/cls/).
-	- Includes `loading="lazy"` for native lazy loading without JavaScript.
-	- Includes [`decoding="async"`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decoding)
-	- Images can be co-located with blog post files.
-- Per page CSS bundles [via `eleventy-plugin-bundle`](https://github.com/11ty/eleventy-plugin-bundle).
-- Built-in [syntax highlighter](https://www.11ty.dev/docs/plugins/syntaxhighlight/) (zero-JavaScript output).
-- Draft content: use `draft: true` to mark any template as a draft. Drafts are **only** included during `--serve`/`--watch` and are excluded from full builds. This is driven by the `addPreprocessor` configuration API in `eleventy.config.js`. Schema validator will show an error if non-boolean value is set in data cascade.
-- Blog Posts
-	- Automated next/previous links
-	- Accessible deep links to headings
-- Generated Pages
-	- Home, Archive, and About pages.
-	- [Atom feed included (with easy one-line swap to use RSS or JSON](https://www.11ty.dev/docs/plugins/rss/)
-	- `sitemap.xml`
-	- Zero-maintenance tag pages ([View on the Demo](https://eleventy-base-blog.netlify.app/tags/))
-	- Content not found (404) page
+- **Static Site Generation**: Fast, secure, and SEO-friendly
+- **Responsive Design**: Works on all devices
+- **RSS Feed**: Atom feed for news updates
+- **Tag System**: Automatic tag pages and filtering
+- **Syntax Highlighting**: Code blocks with Prism.js
+- **Table of Contents**: Automatic TOC generation for posts
+- **Heading Anchors**: Deep linking to sections
+- **Image Optimization**: Automatic image processing and optimization
+- **Draft Support**: Mark posts as drafts during development
 
-## Demos
+## Configuration
 
-- [Netlify](https://eleventy-base-blog.netlify.app/)
-- [Vercel](https://demo-base-blog.11ty.dev/)
-- [Cloudflare Pages](https://eleventy-base-blog-d2a.pages.dev/)
-- [Remix on Glitch](https://glitch.com/~11ty-eleventy-base-blog)
-- [GitHub Pages](https://11ty.github.io/eleventy-base-blog/)
+### Eleventy Configuration
 
-## Deploy this to your own site
+Key configuration options in `eleventy.config.js`:
+- **Input Directory**: `content/`
+- **Output Directory**: `_site/`
+- **Template Engine**: Nunjucks for HTML, Markdown for content
+- **Path Prefix**: `/static-website/` for GitHub Pages deployment
 
-Deploy this Eleventy site in just a few clicks on these services:
+### Site Metadata
 
-- Read more about [Deploying an Eleventy project](https://www.11ty.dev/docs/deployment/) to the web.
-- [Deploy this to **Netlify**](https://app.netlify.com/start/deploy?repository=https://github.com/11ty/eleventy-base-blog)
-- [Deploy this to **Vercel**](https://vercel.com/import/project?template=11ty%2Feleventy-base-blog)
-- Look in `.github/workflows/gh-pages.yml.sample` for information on [Deploying to **GitHub Pages**](https://www.11ty.dev/docs/deployment/#deploy-an-eleventy-project-to-git-hub-pages).
-- [Try it out on **Stackblitz**](https://stackblitz.com/github/11ty/eleventy-base-blog)
+Global site settings are in `_data/metadata.js`:
+- Site title and description
+- Author information
+- RSS feed configuration
 
-### Implementation Notes
+## Contributing
 
-- `content/about/index.md` is an example of a content page.
-- `content/blog/` has the blog posts but really they can live in any directory. They need only the `posts` tag to be included in the blog posts [collection](https://www.11ty.dev/docs/collections/).
-- Use the `eleventyNavigation` key (via the [Eleventy Navigation plugin](https://www.11ty.dev/docs/plugins/navigation/)) in your front matter to add a template to the top level site navigation. This is in use on `content/index.njk` and `content/about/index.md`.
-- Content can be in _any template format_ (blog posts needn’t exclusively be markdown, for example). Configure your project’s supported templates in `eleventy.config.js` -> `templateFormats`.
-- The `public` folder in your input directory will be copied to the output folder (via `addPassthroughCopy` in the `eleventy.config.js` file). This means `./public/css/*` will live at `./_site/css/*` after your build completes.
-- This project uses three [Eleventy Layouts](https://www.11ty.dev/docs/layouts/):
-	- `_includes/layouts/base.njk`: the top level HTML structure
-	- `_includes/layouts/home.njk`: the home page template (wrapped into `base.njk`)
-	- `_includes/layouts/post.njk`: the blog post template (wrapped into `base.njk`)
-- `_includes/postslist.njk` is a Nunjucks include and is a reusable component used to display a list of all the posts. `content/index.njk` has an example of how to use it.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test locally with `npm start`
+5. Submit a pull request
 
-#### Content Security Policy
+## License
 
-If your site enforces a [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) (as public-facing sites should), you have a few choices (pick one):
+This project is part of the eXist-db project and follows the same licensing terms.
 
-1. In `base.njk`, remove `<style>{% getBundle "css" %}</style>` and uncomment `<link rel="stylesheet" href="{% getBundleFileUrl "css" %}">`
-2. Configure the server with the CSP directive `style-src: 'unsafe-inline'` (less secure).
+## Links
+
+- [eXist-db Website](https://exist-db.org/)
+- [eXist-db Documentation](https://exist-db.org/exist/apps/doc/index.html)
+- [eXist-db GitHub](https://github.com/exist-db/exist)
+- [Eleventy Documentation](https://www.11ty.dev/docs/)
