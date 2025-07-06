@@ -195,5 +195,5 @@ export const config = {
 	// folder name and does **not** affect where things go in the output folder.
 
 	// For GitHub Pages, use the repository name as path prefix
-	pathPrefix: process.env.ELEVENTY_RUN_MODE === "serve" ? "/" : "/static-website/",
+	pathPrefix: process.env.ELEVENTY_RUN_MODE === "serve" ? "/" : "/existdb-static/",
 };
