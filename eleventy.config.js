@@ -194,5 +194,6 @@ export const config = {
 	// it will transform any absolute URLs in your HTML to include this
 	// folder name and does **not** affect where things go in the output folder.
 
-	// pathPrefix: "/",
+	// For GitHub Pages, use the repository name as path prefix
+	pathPrefix: process.env.ELEVENTY_RUN_MODE === "serve" ? "/" : "/static-website/",
 };

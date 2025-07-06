@@ -7,12 +7,13 @@
 		"build": "npm run build:css && npx @11ty/eleventy",
 		"build:css": "sass sass/main.scss:public/css/main.css --style=compressed",
 		"build-nocolor": "npm run build:css && cross-env NODE_DISABLE_COLORS=1 npx @11ty/eleventy",
-		"build-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+		"build-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/static-website/",
 		"start": "npm run build:css && npx @11ty/eleventy --serve --quiet",
-		"start-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/eleventy-base-blog/ --serve --quiet",
+		"start-ghpages": "npm run build:css && npx @11ty/eleventy --pathprefix=/static-website/ --serve --quiet",
 		"debug": "npm run build:css && cross-env DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "npm run build:css && cross-env DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
-		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy"
+		"benchmark": "cross-env DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+		"deploy": "node scripts/deploy.js"
 	},
 	"repository": {
 		"type": "git",
